@@ -1,5 +1,5 @@
-import { useAccount } from 'wagmi'
-import { FormLabel, Input, InputGroup, InputLeftElement, InputRightAddon, InputRightElement, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Stack, TagLabel, Text } from '@chakra-ui/react'
+
+import { FormLabel, Input, InputGroup, InputRightAddon, NumberInput, NumberInputField, Stack } from '@chakra-ui/react'
 import { Textarea } from '@chakra-ui/react'
 import styles from './order.module.css'
 import FileUploader from './FileUploader'
