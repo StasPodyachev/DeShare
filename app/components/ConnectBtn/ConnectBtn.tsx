@@ -5,6 +5,6 @@ export const ConnectBtn = () => {
     <ConnectButton
       chainStatus="icon"
       showBalance={false}
-      accountStatus={{ largeScreen: 'full', smallScreen: "address" }} />
+      accountStatus={{ largeScreen: 'full', smallScreen: "full" }} />
   )
 }

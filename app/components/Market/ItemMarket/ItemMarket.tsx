@@ -1,46 +1,33 @@
 
+import { DownloadIcon } from '@chakra-ui/icons'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 import Button from '../../ui/Button'
 import styles from './ItemMarket.module.css'
 interface OrderModel {
-    id: number,
-    currencyName: string,
-    price: number,
-    icon: string,
-    description: string,
-    duration: string,
-    leverage: string,
-    currency: string,
-    orderLink: string,
-    percent: string,
-    derevativeName: string
+  id: number
+  title: string
+  description: string
+  price: string
+  size: string
+  icon: string
 }
 
-const ItemMarket = ({order, coin} : {order: OrderModel, coin: any}) => {
-  const { push } = useRouter()
+const ItemMarket = ({order} : {order: OrderModel}) => {
   return (
     <div className={styles.itemMarket}>
       <div className={styles.header}>
+        <Image src={order?.icon} width={40} height={40} alt="icon"/>
+        <span className={styles.title}>{order?.title}</span>
+        <span className={styles.price}>{order?.price}</span>
       </div>
       <span className={styles.description}>{order?.description}</span>
       <div className={styles.options}>
-        <div>
-          <Image src="/icons/orderIcon/duration.svg" width={15} height={15} alt="duration" />
-          <span>{order?.duration}</span>
-        </div>
-        <div>
-          <Image src="/icons/orderIcon/leverage.svg" width={15} height={15} alt="leverage" />
-          <span>{order?.leverage}</span>
-        </div>
-        <div>
-          <Image src="/icons/orderIcon/wallets.svg" width={15} height={15} alt="currency"/>
-          <span>{order?.currency}</span>
-        </div>
+        <DownloadIcon />
+        <span>Size files {order?.size}</span>
       </div>
 
       <div className={styles.btn}>
-        <Button onClick={() => push(`/order-book/${order?.currencyName}`)} title='Start traiding' />
+        <Button onClick={() => console.log("Buy")} title='Buy'/>
       </div>
     </div>
   )
