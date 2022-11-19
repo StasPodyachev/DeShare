@@ -4,6 +4,14 @@
   flex-direction: column;
 }
 
+.layout h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  color: #A6A0BB;
+  margin-bottom: 24px;
+}
+
 @media (min-width: 520px) {
 
   .layout {

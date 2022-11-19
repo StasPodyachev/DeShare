@@ -7,6 +7,7 @@ const Layout = ({children, title, networkId} : {children, title: string, network
       <div className={styles.layout}>
         <Header />
         <div className={styles.main}>
+          <h1>{title}</h1>
           {children}
         </div>
       </div>
@@ -18,6 +19,7 @@ const Layout = ({children, title, networkId} : {children, title: string, network
       <div className={styles.layout}>
         <Header/>
         <div className={styles.main}>
+          <h1>{title}</h1>
           {children}
         </div>
       </div>

@@ -1,7 +1,10 @@
 import styles from './Header.module.css'
 import Logo from './Logo'
 import Nav from './Nav'
-import { ConnectBtn } from '../ConnectBtn/ConnectBtn';
+import dynamic from 'next/dynamic'
+const ConnectBtn = dynamic(() => import('../ConnectBtn'), {
+  ssr: false,
+})
 
 const Header = () => {
   return (

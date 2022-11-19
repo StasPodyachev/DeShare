@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
+
 import type { AppProps } from 'next/app';
 import { isMobile } from 'react-device-detect';
 import {
@@ -14,21 +15,39 @@ import {
   createAuthenticationAdapter,
   RainbowKitAuthenticationProvider,
   RainbowKitProvider,
-  AuthenticationStatus
+  AuthenticationStatus,
+  Chain
 } from '@rainbow-me/rainbowkit';
 import { SiweMessage } from 'siwe';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { configureChains,chain, createClient, WagmiConfig } from 'wagmi';
+import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { TransactionManageProvider } from '../context/TransactionManageProvider';
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from '../theme'
 
+const wallaby: Chain = {
+  id: 31415,
+  name: 'Wallaby testnet',
+  network: 'avalanche',
+  iconUrl: 'https://example.com/icon.svg',
+  iconBackground: '#fff',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'tFIL',
+    symbol: 'tFIL',
+  },
+  rpcUrls: {
+    default: 'https://wallaby.node.glif.io/rpc/v0',
+  },
+  testnet: true,
+};
+
 const { provider, chains, webSocketProvider } = configureChains(
   [
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true'
-      ? [chain.polygonMumbai]
+      ? [wallaby]
       : []),
   ],
   [
@@ -157,7 +176,7 @@ export default function MyApp({Component,pageProps}: AppProps) {
           adapter={authAdapter}
           status={authStatus}>
           <RainbowKitProvider
-            showRecentTransactions={true}
+            // showRecentTransactions={true}
             modalSize="wide"
             theme={darkTheme({
               accentColor: '#7b3fe4',
@@ -181,7 +200,7 @@ export default function MyApp({Component,pageProps}: AppProps) {
         adapter={authAdapter}
         status={authStatus}>
         <RainbowKitProvider
-          showRecentTransactions={true}
+          // showRecentTransactions={true}
           modalSize="wide"
           theme={darkTheme({
             accentColor: '#7b3fe4',
