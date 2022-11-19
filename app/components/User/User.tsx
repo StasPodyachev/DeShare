@@ -53,7 +53,7 @@ const User = () => {
      {
       markets.map(order => {
        return (
-        <ItemMarket key={order.icon} order={order} />
+        <ItemMarket key={order.icon} order={order} type="order" />
        )
       })
      }
@@ -63,7 +63,7 @@ const User = () => {
     {
       markets.map(order => {
        return (
-        <ItemMarket key={order.icon} order={order} />
+        <ItemMarket key={order.icon} order={order} type="order" />
        )
       })
      }

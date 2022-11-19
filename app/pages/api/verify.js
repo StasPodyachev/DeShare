@@ -1,10 +1,9 @@
 import { withIronSessionApiRoute } from 'iron-session/next'
-import { NextApiRequest, NextApiResponse } from 'next'
 import { SiweMessage } from 'siwe'
 
 import { ironOptions } from '../../lib/iron'
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req, res) => {
   const { method } = req
   switch (method) {
     case 'POST':

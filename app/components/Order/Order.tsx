@@ -33,7 +33,7 @@ const Order = () => {
       <NumberInput background="#131118" defaultValue={15} min={10}>
        <NumberInputField borderRadius="8px 0px 0px 8px" />
       </NumberInput>
-      <InputRightAddon children='Days' />
+      <InputRightAddon>Days</InputRightAddon>
      </InputGroup>
 
      <FormLabel color="#A6A0BB">Price</FormLabel>
@@ -41,7 +41,7 @@ const Order = () => {
       <NumberInput background="#131118" defaultValue={15} min={10}>
        <NumberInputField borderRadius="8px 0px 0px 8px" />
       </NumberInput>
-      <InputRightAddon children='USDT' />
+      <InputRightAddon>USDT</InputRightAddon>
      </InputGroup>
 
      <FormLabel color="#A6A0BB">Upload File</FormLabel>

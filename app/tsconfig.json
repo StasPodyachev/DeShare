@@ -19,7 +19,7 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types/**/*.d.ts", "components/ErrorBoundary/ErrorBoundary.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types/**/*.d.ts", "components/ErrorBoundary/ErrorBoundary.jsx", "pages/api/verify.js", "pages/api/nonce.js", "pages/api/me.js"],
   "exclude": [
     "node_modules"
   ]
