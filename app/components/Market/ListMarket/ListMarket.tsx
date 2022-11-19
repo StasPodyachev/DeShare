@@ -1,5 +1,3 @@
-
-import { PlusSquareIcon } from '@chakra-ui/icons'
 import Button from '../../ui/Button'
 import ItemMarket from '../ItemMarket/ItemMarket'
 import styles from './ListMarket.module.css'
@@ -22,7 +20,7 @@ const markets = [
     icon: "/icons/iconsCurrency/Coinbase.svg"
   },
   {
-    id: 1,
+    id: 13,
     title: "Icons",
     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum totam ut, ipsa a explicabo, autem sed suscipit necessitatibus adipisci similique saepe dolor inventore!",
     price: "220.50 USDT",

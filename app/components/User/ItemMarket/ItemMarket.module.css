@@ -1,0 +1,81 @@
+.itemMarket {
+  margin: 24px 0;
+  background-color: #1C1924;
+  padding: 16px;
+  border-radius: 8px;  
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+  margin-right: 12px;
+  font-size: 16px;
+  justify-content: space-between;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 30px;
+  margin-left: auto;
+  background: linear-gradient(96.96deg, #9DE7BD 21.34%, #36CD77 119.18%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+}
+
+.currencyName {
+  color: #C8C3D5;
+  font-size: 16px;
+}
+
+.percent {
+  margin-left: auto;
+  margin-bottom: auto;
+}
+
+.description {
+  font-size: 12px;
+  line-height: 18px;
+  color: #BDB7CC;
+}
+
+.options {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.options span {
+  margin-left: 12px;
+}
+
+.options > div {
+  display: flex; 
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.options > div > span {
+  margin-left: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 12px;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  color: #BDB7CC;
+}
+
+.btn {
+  margin: 40px 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

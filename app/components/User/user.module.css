@@ -8,6 +8,14 @@
  border-radius: 8px;
  display: flex;
  flex-direction: column;
+ margin-top: 24px;
+}
+
+.title {
+ font-size: 20px;
+ font-weight: 700;
+ font-family: "Poppins", sans-serif;
+ margin: 24px 0;
 }
 
 .block h2 {
