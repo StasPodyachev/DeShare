@@ -7,7 +7,9 @@ const Market = dynamic(() => import('../components/Market'), {
 })
 import { useNetwork } from 'wagmi'
 const Home = () => {
+
   const { chain } = useNetwork()
+
   return (
     <Layout networkId={chain?.id} title="Market">
       <Market/>

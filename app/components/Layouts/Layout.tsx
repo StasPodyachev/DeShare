@@ -1,16 +1,19 @@
 import styles from './Layout.module.css'
 import Header from '../Header';
+import LayoutFaucet from './Faucet';
 
 const Layout = ({children, title, networkId} : {children, title: string, networkId: number}) => {
-  if (networkId === 420 ||networkId === 80001 ) {
+  if (networkId ) {
     return (
-      <div className={styles.layout}>
-        <Header />
-        <div className={styles.main}>
-          <h1>{title}</h1>
-          {children}
+      <LayoutFaucet networkId={networkId}>
+        <div className={styles.layout}>
+          <Header />
+          <div className={styles.main}>
+            <h1>{title}</h1>
+            {children}
+          </div>
         </div>
-      </div>
+      </LayoutFaucet>
       
     )
   }

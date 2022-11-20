@@ -33,13 +33,13 @@ const markets = [
   }
 ]
 
-const ListMarket = () => {
+const ListMarket = ({isApprove, isSetApprove}) => {
   const {push} = useRouter()
   return (
     <div className={styles.listMarket}>
       {
         markets?.map(order => {
-          return <ItemMarket order={order} key={order.id}/>
+          return <ItemMarket isSetApprove={isSetApprove} order={order} isApprove={isApprove} key={order.id}/>
         })
       }
       <div className={styles.btn}>

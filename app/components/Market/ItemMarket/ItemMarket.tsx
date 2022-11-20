@@ -1,7 +1,9 @@
 
 import { DownloadIcon } from '@chakra-ui/icons'
 import Image from 'next/image'
+import { useSigner } from 'wagmi'
 import Button from '../../ui/Button'
+import ApproveBtn from '../ApproveBtn'
 import styles from './ItemMarket.module.css'
 interface OrderModel {
   id: number
@@ -12,7 +14,9 @@ interface OrderModel {
   icon: string
 }
 
-const ItemMarket = ({order} : {order: OrderModel}) => {
+const ItemMarket = ({order, isApprove, isSetApprove} : {order: OrderModel, isApprove: boolean, isSetApprove: (arg: boolean) => void}) => {
+
+  const signer = useSigner()
   return (
     <div className={styles.itemMarket}>
       <div className={styles.header}>
@@ -25,10 +29,14 @@ const ItemMarket = ({order} : {order: OrderModel}) => {
         <DownloadIcon />
         <span>Size files {order?.size}</span>
       </div>
-
-      <div className={styles.btn}>
-        <Button onClick={() => console.log("Buy")} title='Buy'/>
-      </div>
+      {
+        isApprove ?
+        <div className={styles.btn}>
+          <Button onClick={() => console.log("Buy")} title='Buy'/>
+        </div> : signer ? <div className={styles.btn}>
+          <ApproveBtn signer={signer} title="Approve" isSetApprove={isSetApprove} />
+        </div> : null
+      }
     </div>
   )
 }

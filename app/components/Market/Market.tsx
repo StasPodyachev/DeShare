@@ -2,10 +2,11 @@
 import ListMarket from './ListMarket/ListMarket'
 import styles from './Market.module.css'
 
-import { useBalance, useContractRead } from 'wagmi'
+import { erc20ABI, useAccount, useContract, useContractRead, useSigner } from 'wagmi'
 import addresses from '../../contracts/addresses'
 import DESHARE_ABI from '../../contracts/abi/DeShare.json'
 import { useEffect, useState } from 'react'
+import { approved } from './utils'
 
 const MarketList = ({setMarkets}) => {
   const { data, isError, isLoading } = useContractRead({
@@ -31,16 +32,32 @@ const MarketList = ({setMarkets}) => {
 
 const Market = () => {
   const [ markets, setMarkets ] = useState([])
+  const {address} = useAccount()
+  const { data: signer } = useSigner()
+  const [ isApprove, isSetApprove ] = useState(false)
+
+  const contractERC20USDC = useContract({
+    address: addresses.USDC,
+    abi: erc20ABI,
+    signerOrProvider: signer
+  })
+
   useEffect(() => {
-    console.log(markets, 'markets');
-  }, [markets])
+    if (address && signer && contractERC20USDC) {
+      approved(contractERC20USDC, address, addresses.deshare).then((res) => {
+        console.log(res, 'res');
+        isSetApprove(res)
+      })
+    }
+  }, [address, signer, contractERC20USDC])
+
   return (
     <div className={styles.main}>
       <p className={styles.title}>
         <span>DeShare is fully decentralized file trading platform.</span> You can easily buy or sell file of any type here.
       </p>
       <MarketList setMarkets={setMarkets} />
-      <ListMarket />
+      <ListMarket isSetApprove={isSetApprove} isApprove={isApprove} />
     </div>
   )
 }
