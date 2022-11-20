@@ -40,7 +40,7 @@ describe("DeShare", () => {
         [USDC, USDT],
         "Test Name",
         "t01113",
-        { value: 1 }
+        { value: 6600000000000 }
       )
 
 
@@ -50,7 +50,7 @@ describe("DeShare", () => {
       expect(id.toString()).to.be.eq(items[0].id.toString());
     })
 
-    it("fails if msg.value is 0", async () => {
+    it("fails if msg.value is incorrect", async () => {
       await expect(
         deShare.publishItem(
           "0x",
@@ -61,7 +61,7 @@ describe("DeShare", () => {
           "t01113",
           "Test Name"
         )
-      ).to.be.revertedWith("DeShare: msg.value cannot be 0")
+      ).to.be.revertedWith("DeShare: msg.value is incorrect")
     })
 
     it("fails if input data is incorrect", async () => {
@@ -74,7 +74,7 @@ describe("DeShare", () => {
           [USDC, USDT],
           "Test Name",
           "t01113",
-          { value: 1 }
+          { value: 6600000000000 }
         )
       ).to.be.revertedWith("DeShare: Incorrect input data")
     })
@@ -91,7 +91,7 @@ describe("DeShare", () => {
         [USDC, USDT],
         "Test Name",
         "t01113",
-        { value: 1 }
+        { value: 6600000000000 }
       )
 
       const id = await deShare.lastId();
@@ -123,7 +123,7 @@ describe("DeShare", () => {
         [USDC, USDT],
         "Test Name",
         "t01113",
-        { value: 1 }
+        { value: 6600000000000 }
       )
 
       const id = await deShare.lastId();
@@ -145,7 +145,7 @@ describe("DeShare", () => {
         [USDC, USDT],
         "Test Name",
         "t01113",
-        { value: 1 }
+        { value: 6600000000000 }
       )
 
       const id = await deShare.lastId();
@@ -169,15 +169,13 @@ describe("DeShare", () => {
         [USDC, USDT],
         "Test Name",
         "t01113",
-        { value: 1 }
+        { value: 6600000000000 }
       )
 
-      const items = await deShare.getAllSellerItems();
       const id = await deShare.lastId();
+      const item = await deShare.getItem(id)
 
       await deShare.deleteItem(id);
-
-      expect(items[0].isDeleted).to.be.eq(true);
 
       await expect(
         deShare.buyItem(id, USDC, 10, "0x")
@@ -199,7 +197,7 @@ describe("DeShare", () => {
         [USDC, USDT],
         "Test Name",
         "t01113",
-        { value: 1 }
+        { value: 6600000000000 }
       )
 
       const id = await deShare.lastId();
@@ -208,8 +206,8 @@ describe("DeShare", () => {
         deShare.deleteItem(id)
       ).to.be.revertedWith("DeShare: Caller does not own the item")
 
-      const items = await deShare.getAllSellerItems();
-      expect(items[0].isDeleted).to.be.eq(false);
+      const item = await deShare.getItem(id);
+      expect(item.isDeleted).to.be.eq(false);
     })
   })
 
@@ -223,21 +221,24 @@ describe("DeShare", () => {
         [USDC, USDT],
         "Test Name",
         "t01113",
-        { value: 1 }
+        { value: 6600000000000 }
       )
 
-      const items = await deShare.getAllSellerItems();
       const id = await deShare.lastId();
 
       await deShare.freezeItem(id, true);
-      expect(items[0].isFreezed).to.be.eq(true);
+      let item = await deShare.getItem(id);
+
+      expect(item.isFreezed).to.be.eq(true);
 
       await expect(
         deShare.buyItem(id, USDC, 10, "0x")
       ).to.be.revertedWith("DeShare: Item is freezed")
 
       await deShare.freezeItem(id, false);
-      expect(items[0].isFreezed).to.be.eq(false);
+      item = await deShare.getItem(id);
+
+      expect(item.isFreezed).to.be.eq(false);
 
       await expect(
         deShare.buyItem(id, USDC, 10, "0x")
@@ -259,7 +260,7 @@ describe("DeShare", () => {
         [USDC, USDT],
         "Test Name",
         "t01113",
-        { value: 1 }
+        { value: 6600000000000 }
       )
 
       const id = await deShare.lastId();
@@ -268,8 +269,8 @@ describe("DeShare", () => {
         deShare.freezeItem(id, true)
       ).to.be.revertedWith("DeShare: Caller does not own the item")
 
-      const items = await deShare.getAllSellerItems();
-      expect(items[0].isFreezed).to.be.eq(false);
+      const item = await deShare.getItem(id);
+      expect(item.isFreezed).to.be.eq(false);
     })
   })
 
@@ -283,7 +284,7 @@ describe("DeShare", () => {
         [USDC, USDT],
         "Test Name",
         "t01113",
-        { value: 1 }
+        { value: 6600000000000 }
       )
 
       const id = await deShare.lastId();
@@ -306,7 +307,7 @@ describe("DeShare", () => {
         [USDC, USDT],
         "Test Name",
         "t01113",
-        { value: 1 }
+        { value: 6600000000000 }
       )
 
       const id = await deShare.lastId();

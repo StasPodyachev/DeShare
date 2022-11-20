@@ -102,10 +102,14 @@ contract DeShare is IDeShare, Ownable {
             provider
         );
 
-        require(deal.id > 0, "DeShare: invalid provider");
+        require(deal.id > 0, "DeShare: Invalid provider");
         require(
             msg.value == (duration / EPOCH_SECONDS) * deal.price_per_epoch,
-            "DeShare: msg.value incorrect"
+            "DeShare: msg.value is incorrect"
+        );
+        require(
+            prices.length == tokens.length,
+            "DeShare: Incorrect input data"
         );
 
         // call filecoin method
