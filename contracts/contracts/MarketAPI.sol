@@ -197,7 +197,7 @@ contract MarketAPI {
     function mock_add_deals(MarketTypes.MockDeal[] calldata deals_) external {
         for (uint64 i = 0; i < deals_.length; i++) {
             deals[i] = deals_[i];
-            deals[i].id = i;
+            deals[i].id = i + 1;
             deals_by_provider[deals_[i].provider] = i;
         }
 
