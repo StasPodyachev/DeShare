@@ -1,6 +1,7 @@
 import { Factory } from '../../typechain/Factory'
 import { ethers } from 'hardhat'
 import { DeShare } from '../../typechain/DeShare'
+import { MarketAPI } from '../../typechain/MarketAPI'
 
 interface FactoryFixture {
   factory: Factory
@@ -23,7 +24,10 @@ export async function deShareFixture(): Promise<DeShareFixture> {
   const deShareFactory = await ethers.getContractFactory('DeShare')
   const deShare = (await deShareFactory.deploy()) as DeShare
 
-  await deShare.setFactory(factory.address)
+  const marketApiFactory = await ethers.getContractFactory('MarketAPI')
+  const marketApi = (await marketApiFactory.deploy()) as MarketAPI
+
+  await deShare.setMarketApi(marketApi.address)
 
   return {
     deShare,

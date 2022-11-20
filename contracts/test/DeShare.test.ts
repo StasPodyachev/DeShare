@@ -31,7 +31,7 @@ describe("DeShare", () => {
   })
 
   describe("#publishItem", () => {
-    it("publush item and get list", async () => {
+    it("publish item and get list", async () => {
       await deShare.publishItem(
         "0x",
         100000,
@@ -39,6 +39,7 @@ describe("DeShare", () => {
         [10, 10],
         [USDC, USDT],
         "Test Name",
+        "t001",
         { value: 1 }
       )
 
@@ -57,6 +58,7 @@ describe("DeShare", () => {
           180,
           [10, 10],
           [USDC, USDT],
+          "t001",
           "Test Name"
         )
       ).to.be.revertedWith("DeShare: msg.value cannot be 0")
@@ -71,6 +73,7 @@ describe("DeShare", () => {
           [10, 10, 10, 10],
           [USDC, USDT],
           "Test Name",
+          "t001",
           { value: 1 }
         )
       ).to.be.revertedWith("DeShare: Incorrect input data")
@@ -87,6 +90,7 @@ describe("DeShare", () => {
         [10, 10],
         [USDC, USDT],
         "Test Name",
+        "t001",
         { value: 1 }
       )
 
@@ -118,6 +122,7 @@ describe("DeShare", () => {
         [10, 10],
         [USDC, USDT],
         "Test Name",
+        "t001",
         { value: 1 }
       )
 
@@ -139,6 +144,7 @@ describe("DeShare", () => {
         [10, 10],
         [USDC, USDT],
         "Test Name",
+        "t001",
         { value: 1 }
       )
 
@@ -151,4 +157,120 @@ describe("DeShare", () => {
       ).to.be.revertedWith("DeShare: Item is freezed")
     })
   })
+
+
+  describe("#deleteItem", () => {
+    it("try to buy item after deleting", async () => {
+      await deShare.publishItem(
+        "0x",
+        100000,
+        180,
+        [10, 10],
+        [USDC, USDT],
+        "Test Name",
+        "t001",
+        { value: 1 }
+      )
+
+      const items = await deShare.getAllSellerItems();
+      const id = await deShare.lastId();
+
+      await deShare.deleteItem(id);
+
+      expect(items[0].isDeleted).to.be.eq(true);
+
+      await expect(
+        deShare.buyItem(id, USDC, 10, "0x")
+      ).to.be.revertedWith("DeShare: Wrong Id")
+    })
+
+    it("fails if item does not exsit", async () => {
+      await expect(
+        deShare.deleteItem(1)
+      ).to.be.revertedWith("DeShare: Wrong Id")
+    })
+
+    it("fails if caller does not own the item", async () => {
+      await deShare.connect(other).publishItem(
+        "0x",
+        100000,
+        180,
+        [10, 10],
+        [USDC, USDT],
+        "Test Name",
+        "t001",
+        { value: 1 }
+      )
+
+      const id = await deShare.lastId();
+
+      await expect(
+        deShare.deleteItem(id)
+      ).to.be.revertedWith("DeShare: Caller does not own the item")
+
+      const items = await deShare.getAllSellerItems();
+      expect(items[0].isDeleted).to.be.eq(false);
+    })
+  })
+
+  describe("#freezeItem", () => {
+    it("try to buy after freeze", async () => {
+      await deShare.publishItem(
+        "0x",
+        100000,
+        180,
+        [10, 10],
+        [USDC, USDT],
+        "Test Name",
+        "t001",
+        { value: 1 }
+      )
+
+      const items = await deShare.getAllSellerItems();
+      const id = await deShare.lastId();
+
+      await deShare.freezeItem(id, true);
+      expect(items[0].isFreezed).to.be.eq(true);
+
+      await expect(
+        deShare.buyItem(id, USDC, 10, "0x")
+      ).to.be.revertedWith("DeShare: Item is freezed")
+
+      await deShare.freezeItem(id, false);
+      expect(items[0].isFreezed).to.be.eq(false);
+
+      await expect(
+        deShare.buyItem(id, USDC, 10, "0x")
+      ).to.be.not.reverted;
+    })
+
+    it("fails if item does not exsit", async () => {
+      await expect(
+        deShare.freezeItem(1, true)
+      ).to.be.revertedWith("DeShare: Wrong Id")
+    })
+
+    it("fails if caller does not own the item", async () => {
+      await deShare.connect(other).publishItem(
+        "0x",
+        100000,
+        180,
+        [10, 10],
+        [USDC, USDT],
+        "Test Name",
+        "t001",
+        { value: 1 }
+      )
+
+      const id = await deShare.lastId();
+
+      await expect(
+        deShare.freezeItem(id, true)
+      ).to.be.revertedWith("DeShare: Caller does not own the item")
+
+      const items = await deShare.getAllSellerItems();
+      expect(items[0].isFreezed).to.be.eq(false);
+    })
+  })
+
 })
