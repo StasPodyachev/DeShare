@@ -12,7 +12,14 @@ interface IDeShare {
         string name;
         string dealCId;
         bytes hash_;
+        bool isFreezed;
     }
+
+    function setFactory(address factory) external;
+
+    function setFeePercent(uint256 val) external;
+
+    function withdraw(address token, uint256 amount) external;
 
     function publishItem(
         bytes calldata hash_,
@@ -23,14 +30,6 @@ interface IDeShare {
         string calldata name
     ) external payable;
 
-    function deleteItem(uint256 id) external;
-
-    function freezeItem(uint256 id) external;
-
-    function getUri(uint256 id, bytes calldata sign)
-        external
-        returns (bytes memory);
-
     function buyItem(
         uint256 id,
         address token,
@@ -38,5 +37,13 @@ interface IDeShare {
         bytes calldata sign
     ) external;
 
-    function setFactory(address factory) external;
+    function getUri(uint256 id, bytes calldata sign)
+        external
+        returns (bytes memory);
+
+    function getItem(uint256 id) external view returns (StoreItem memory);
+
+    function deleteItem(uint256 id) external;
+
+    function freezeItem(uint256 id) external;
 }

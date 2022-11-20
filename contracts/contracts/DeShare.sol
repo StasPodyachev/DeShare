@@ -21,7 +21,7 @@ contract DeShare is IDeShare, Ownable {
     IFactory _factory;
 
     modifier itemExists(uint256 id) {
-        require(_itemsMap[id] > 0, "DeDhare: Wrong Id");
+        require(_itemsMap[id] > 0, "DeShare: Wrong Id");
         _;
     }
 
@@ -31,6 +31,10 @@ contract DeShare is IDeShare, Ownable {
 
     function setFeePercent(uint256 val) external onlyOwner {
         feePercent = val;
+    }
+
+    function withdraw(address token, uint256 amount) external onlyOwner {
+        TransferHelper.safeTransfer(token, msg.sender, amount);
     }
 
     function publishItem(
@@ -55,7 +59,8 @@ contract DeShare is IDeShare, Ownable {
                 duration: duration,
                 name: name,
                 dealCId: "",
-                hash_: hash_
+                hash_: hash_,
+                isFreezed: false
             })
         );
 
@@ -71,6 +76,8 @@ contract DeShare is IDeShare, Ownable {
     ) external itemExists(id) {
         uint256 index = _itemsMap[id];
         StoreItem memory item = _items[index];
+
+        require(item.isFreezed == false, "DeShare: Item is freezed");
 
         for (uint256 i = 0; i < item.tokens.length; i++) {
             if (item.tokens[i] == token) {
@@ -94,6 +101,7 @@ contract DeShare is IDeShare, Ownable {
 
     function getUri(uint256 id, bytes calldata sign)
         external
+        view
         itemExists(id)
         returns (bytes memory)
     {
@@ -113,26 +121,7 @@ contract DeShare is IDeShare, Ownable {
         return _items[_itemsMap[id]];
     }
 
-    function withdraw(address token, uint256 amount) external onlyOwner {
-        TransferHelper.safeTransfer(token, msg.sender, amount);
-    }
-
     function deleteItem(uint256 id) external itemExists(id) {}
 
     function freezeItem(uint256 id) external itemExists(id) {}
 }
-
-// get all providers
-
-// createItem
-
-// freezeItem
-// deleteItem
-
-// getItem
-
-// buyItem
-// _depositToBuy
-// _sellItem
-
-// setFactory
