@@ -13,6 +13,7 @@ const Order = () => {
  const [price, setPrice] = useState(50)
  const [duration, setDuration] = useState(15)
  const [sid, setSid] = useState<any>('')
+
  const [selectedFile, setSelectedFile] = useState(null)
 
  const handleInputChangeName = (e) => setName(e.target.value)
@@ -31,14 +32,14 @@ const Order = () => {
      <FormControl>
       <FormLabel color="#A6A0BB">File Name</FormLabel>
       <InputGroup mt="0">
-        <Input value={name} onChange={handleInputChangeDescription}  background="#131118" placeholder='What exactly are you selling'/>
+        <Input value={name} onChange={handleInputChangeName}  background="#131118" placeholder='What exactly are you selling'/>
       </InputGroup>
      </FormControl>
 
      <FormControl>
       <FormLabel color="#A6A0BB">File Description</FormLabel>
       <InputGroup>
-        <Textarea value={description} onChange={handleInputChangeName} background="#131118" placeholder='Some words about your file'/>
+        <Textarea value={description} onChange={handleInputChangeDescription} background="#131118" placeholder='Some words about your file'/>
       </InputGroup>
      </FormControl>
 
