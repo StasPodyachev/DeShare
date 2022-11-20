@@ -6,7 +6,9 @@ import Link from 'next/link'
 const navigation = [
   { name: 'Market', href: '/', current: true },
   { name: 'Sell File', href: '/order', current: false },
-  { name: 'Dashboard', href: '/user', current: false }
+  { name: 'Dashboard', href: '/user', current: false },
+  { name: 'FAQ', href: '/faq', current: false }
+
 ]
 
 const Nav = () => {
