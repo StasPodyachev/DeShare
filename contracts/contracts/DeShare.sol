@@ -112,8 +112,6 @@ contract DeShare is IDeShare, Ownable {
             "DeShare: Incorrect input data"
         );
 
-        // call filecoin method
-
         _items.push(
             StoreItem({
                 id: ++lastId,
