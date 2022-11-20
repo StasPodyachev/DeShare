@@ -5,7 +5,7 @@ import User from '../components/User'
 const Home = () => {
   const { chain } = useNetwork()
   return (
-    <Layout networkId={chain?.id} title="Account">
+    <Layout networkId={chain?.id} title="Dashboard">
      <User/>
     </Layout>
   )

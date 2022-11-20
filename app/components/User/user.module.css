@@ -32,3 +32,26 @@
  font-size: 12px;
  line-height: 16px;
 }
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list {
+  display: flex;
+  align-items: flex-end;
+}
+
+.list > div {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.default {
+  opacity: .8;
+}
+
+.active {
+  color: slateblue;
+}

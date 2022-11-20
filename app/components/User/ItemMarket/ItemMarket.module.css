@@ -79,3 +79,17 @@
   align-items: center;
   justify-content: center;
 }
+
+.options span.category {
+  margin-left: 0;
+  color: #9DE7BD;
+}
+
+.options span.category {
+  display: flex;
+}
+
+.options span.category p {
+  margin-right: 8px;
+  color: #fff;
+}
