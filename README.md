@@ -63,14 +63,6 @@ npx hardhat configure:all --network <network>
 npx hardhat run scripts/verify.ts --network <network>
 ```
 
-## Subgraph
-
-`yarn`
-
-or
-
-`npm install`
-
 ### Deploy
 
 ```
