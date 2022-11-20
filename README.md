@@ -11,13 +11,12 @@ This repository contains smart contracts and developer tools for DeShare V1 prot
 
 DeShare V1 is a fully decentralized file trading platform. Users can buy and sell any files using Filecoin and IPFS.
 
+In times of increasing censorship from the authorities and large corporations, it is necessary to have an environment where freedom of speech and expression are the key values. So far as Filecoin is a decentralized storage network designed to store humanity’s most important information, no one has to restrict information sharing inside the network.
 
-In times of increasing censorship from the authorities and large corporations, it is necessary to have an environment where freedom of speech and expression are the key values. So far as Filecoin is a decentralized storage network designed to store humanity’s most important information, no one has to restrict information sharing inside the network. 
-
-During Hack FEVM our team decided to work on MVP of an anonymous uncensored content trading platform managed by DAO. 
+During Hack FEVM our team decided to work on MVP of an anonymous uncensored content trading platform managed by DAO.
 There are three roles on the platform: content Seller, content Buyer and Arbitrator.
 Users authorize with Metamask.
-The content Seller can upload the file to the vault in IPFS. The vault key is stored in a smart contract (actor). The Seller selects a category, adds a description and a sample if necessary. Also, the Seller can limit the storage period for the file, after which it is automatically deleted. 
+The content Seller can upload the file to the vault in IPFS. The vault key is stored in a smart contract (actor). The Seller selects a category, adds a description and a sample if necessary. Also, the Seller can limit the storage period for the file, after which it is automatically deleted.
 The Buyer can find files by category and description, view samples and make purchases at the platform.
 
 Next upgrades to be done after the hackathon.
@@ -26,7 +25,8 @@ Significant files may be sold with Arbitrators’ escrow.
 Arbitrator is a DAO participant, who owns a certain number of DeShare DAO tokens and can be chosen by the Seller as a escrow agent confirming quality of the file and guarantying payment. In that case the Arbitrator receives fee. Once the Buyer has paid, the funds will not be released to the Seller until the Buyer or Arbitrator signs the second transaction. The Buyer can apply to the Arbitrator with a request to return the money back if the file does not match the description or samples.
 
 The web interface code is stored on IPFS so anyone can deploy it at any time and check that the site interacts with the original smart contracts.
-Content Sellers will pay 10% of the content price to the DAO treasure. DAO structure and tokenomics will be a subject of further work. 
+Content Sellers will pay 10% of the content price to the DAO treasure. DAO structure and tokenomics will be a subject of further work.
+
 ## Documentation
 
 #### Whitepaper: in progress
@@ -81,7 +81,7 @@ or
 
 ## Testing
 
-in progress.
+yarn test
 
 ## Contracts
 
