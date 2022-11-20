@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import Button from '../../ui/Button'
 import ItemMarket from '../ItemMarket/ItemMarket'
 import styles from './ListMarket.module.css'
@@ -33,6 +34,7 @@ const markets = [
 ]
 
 const ListMarket = () => {
+  const {push} = useRouter()
   return (
     <div className={styles.listMarket}>
       {
@@ -41,7 +43,7 @@ const ListMarket = () => {
         })
       }
       <div className={styles.btn}>
-        <Button onClick={() => console.log("+ Sell")} title='+ Sell'/>
+        <Button onClick={() => push("/order")} title='+ Sell'/>
       </div>
     </div>
   )

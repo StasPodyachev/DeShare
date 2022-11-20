@@ -18,7 +18,7 @@ const Order = () => {
 
  const handleInputChangeName = (e) => setName(e.target.value)
  const handleInputChangeDescription = (e) => setDescription(e.target.value)
- const handleInputChangePrice = (e) => setPrice(e.target.value)
+ const handleInputChangePrice = (e) => setPrice(e.target.value);
  const handleInputChangeDuration = (e) => setDuration(e.target.value)
 
  useEffect(() => {
@@ -46,9 +46,8 @@ const Order = () => {
      <FormControl>
       <FormLabel color="#A6A0BB">Sale Duration</FormLabel>
       <InputGroup>
-        <NumberInput background="#131118" defaultValue={15} min={10}
-           value={duration} onChange={handleInputChangeDuration} >
-          <NumberInputField borderRadius="8px 0px 0px 8px" />
+        <NumberInput background="#131118" defaultValue={15} min={10}>
+          <NumberInputField value={duration} onChange={handleInputChangeDuration} borderRadius="8px 0px 0px 8px" />
         </NumberInput>
         <InputRightAddon>Days</InputRightAddon>
       </InputGroup>
@@ -57,8 +56,8 @@ const Order = () => {
      <FormControl>
       <FormLabel color="#A6A0BB">Price</FormLabel>
       <InputGroup>
-        <NumberInput value={price} onChange={handleInputChangePrice}   background="#131118" defaultValue={15} min={10}>
-          <NumberInputField borderRadius="8px 0px 0px 8px" />
+        <NumberInput background="#131118" defaultValue={15} min={10}>
+          <NumberInputField  value={price} onChange={handleInputChangePrice} borderRadius="8px 0px 0px 8px" />
         </NumberInput>
         <InputRightAddon>USDT</InputRightAddon>
       </InputGroup>
