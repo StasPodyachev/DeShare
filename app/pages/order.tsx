@@ -10,7 +10,7 @@ import { useNetwork } from 'wagmi'
 const Home = () => {
   const { chain } = useNetwork()
   return (
-    <Layout networkId={chain?.id} title="Create Sell">
+    <Layout networkId={chain?.id} title="Sell File">
      <Order/>
     </Layout>
   )
