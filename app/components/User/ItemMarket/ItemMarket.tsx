@@ -10,6 +10,7 @@ interface OrderModel {
   price: string
   size: string
   icon: string
+  categories: string
 }
 
 const ItemMarket = ({order, type} : {order: OrderModel, type: string}) => {
@@ -24,6 +25,10 @@ const ItemMarket = ({order, type} : {order: OrderModel, type: string}) => {
       <div className={styles.options}>
         <DownloadIcon />
         <span>Size files {order?.size}</span>
+      </div>
+      <div className={styles.options}>
+        
+        <span className={styles.category}><p>Categories</p> {order?.categories}</span>
       </div>
     </div>
   )
