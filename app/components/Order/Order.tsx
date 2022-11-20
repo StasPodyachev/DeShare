@@ -5,6 +5,7 @@ import styles from './order.module.css'
 import FileUploader from './FileUploader'
 import { useEffect, useState } from 'react'
 import Button from '../ui/Button'
+import { DeleteIcon } from '@chakra-ui/icons'
 
 const Order = () => {
  const [name, setName] = useState("")
@@ -44,9 +45,16 @@ const Order = () => {
       <InputRightAddon>USDT</InputRightAddon>
      </InputGroup>
 
-     <FormLabel color="#A6A0BB">Upload File</FormLabel>
+     
+     <FormLabel color="#A6A0BB">Upload Files</FormLabel>
      <InputGroup>
-     <FileUploader onFileSelect={(file) => setSelectedFile(file)}/>
+      {
+        !selectedFile ? <FileUploader onFileSelect={(file) => setSelectedFile(file)}/> :
+        <div className={styles.fileName}>
+          <span>{selectedFile?.name}</span>
+          <div className={styles.delete} onClick={() => setSelectedFile(null)}><DeleteIcon /></div>
+        </div>
+      }
      </InputGroup>
    </Stack>
    <div className={styles.btn}>

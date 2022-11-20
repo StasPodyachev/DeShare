@@ -31,3 +31,45 @@
  align-items: center;
  margin-top: 40px;
 }
+
+
+.wrapper {
+ width: 100%;
+ position: relative;
+ text-align: center;
+}
+
+.input {
+ opacity: 0;
+ visibility: hidden;
+ position: absolute;
+}
+
+.button, .fileName {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ width: 60%;
+ height: 40px;
+ color: #fff;
+ font-size: 12px;
+ font-weight: 700;
+ border-radius: 3px;
+ max-width: 200px;
+ cursor: pointer;
+ background: #1e9650;
+ border-radius: 8px;
+}
+
+.fileName span {
+ padding: 10px; /* Поля вокруг текста */
+ white-space: nowrap; /* Текст не переносится */
+ overflow: hidden; /* Обрезаем всё за пределами блока */
+ text-overflow: ellipsis;
+ max-width: 140px;
+}
+
+.delete {
+ margin-left: 12px;
+}
+
