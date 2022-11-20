@@ -1,3 +1,7 @@
 {
-  "31415": {}
+  "31415": {
+    "Factory": { "address": "0x930826f2F2eEf29Ddd1Cb3a8F6ca10e807Cc32cc" },
+    "MarketAPI": { "address": "0x139391D7bC5E31aDd6C5c9c340fC9aCaDad1E52F" },
+    "DeShare": { "address": "0xA51DFA58a165B2f2017Fcfa0D8993dE87d18a382" }
+  }
 }

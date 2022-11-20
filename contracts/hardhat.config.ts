@@ -27,19 +27,9 @@ const config = {
         interval: 100,
       },
     },
-    mainnet: {
-      url: `https://eth-mainnet.g.alchemy.com/v2/FNCgX5LBec5fQS3bbOyok6c-xxgQix3y`,
-      chainId: 1,
-      accounts: [process.env.DEPLOY_PRIVATE_KEY],
-    },
-    "optimism-goerli": {
-      url: `https://opt-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_KEY}`,
-      chainId: 420,
-      accounts: [process.env.DEPLOY_PRIVATE_KEY],
-    },
-    mumbai: {
-      url: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.MUMBAI_ALCHEMY_KEY}`,
-      chainId: 80001,
+    wallaby: {
+      url: "https://wallaby.node.glif.io/rpc/v0",
+      chainId: 31415,
       accounts: [process.env.DEPLOY_PRIVATE_KEY],
     },
   },
