@@ -17,6 +17,7 @@ contract DeShare is IDeShare, Ownable {
     mapping(address => uint256[]) internal _buyerItems;
     mapping(address => uint256[]) internal _sellerItems;
     mapping(uint256 => uint256) internal _itemsMap;
+    mapping(uint256 => bool) internal _existingItems;
 
     StoreItem[] internal _items;
 
@@ -27,7 +28,7 @@ contract DeShare is IDeShare, Ownable {
     MarketAPI public _marketApi;
 
     modifier itemExists(uint256 id) {
-        require(_itemsMap[id] > 0, "DeShare: Wrong Id");
+        require(_existingItems[id], "DeShare: Wrong Id");
 
         StoreItem storage item = _items[_itemsMap[id]];
         require(item.isDeleted == false, "DeShare: Wrong Id");
@@ -127,6 +128,7 @@ contract DeShare is IDeShare, Ownable {
 
         _sellerItems[msg.sender].push(lastId);
         _itemsMap[lastId] = _items.length - 1;
+        _existingItems[lastId] = true;
     }
 
     function buyItem(
