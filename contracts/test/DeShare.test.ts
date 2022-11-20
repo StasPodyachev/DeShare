@@ -1,4 +1,4 @@
-import { ethers, waffle } from "hardhat"
+import { ethers, waffle, network } from "hardhat"
 import { BigNumber, constants, ContractFactory, Wallet } from "ethers"
 import { Factory } from "../typechain/Factory"
 import { expect } from "chai"
@@ -113,6 +113,28 @@ describe("DeShare", () => {
       ).to.be.revertedWith("DeShare: Wrong Id")
     })
 
+    it("fails if deal expired", async () => {
+      await deShare.publishItem(
+        "0x",
+        100000,
+        180,
+        [10, 10],
+        [USDC, USDT],
+        "Test Name",
+        "t01113",
+        { value: 6600000000000 }
+      )
+
+      const id = await deShare.lastId();
+
+      await network.provider.send("evm_increaseTime", [200]);
+      await network.provider.request({ method: "evm_mine", params: [] });
+
+      await expect(
+        deShare.buyItem(id, USDC, 10, "0x")
+      ).to.be.revertedWith("DeShare: Deal expired")
+    })
+
     it("fails if item is deleted", async () => {
       await deShare.publishItem(
         "0x",
@@ -133,7 +155,6 @@ describe("DeShare", () => {
         deShare.buyItem(id, USDC, 10, "0x")
       ).to.be.revertedWith("DeShare: Wrong Id")
     })
-
 
     it("fails if item is freezed", async () => {
       await deShare.publishItem(
@@ -357,6 +378,87 @@ describe("DeShare", () => {
       items = await deShare.getAllItems();
       expect(2).to.be.eq(items.length);
     })
+  })
 
+  describe("#getAllSellerItems", () => {
+    it("try to get all seller items", async () => {
+      let items = await deShare.getAllSellerItems();
+      expect(0).to.be.eq(items.length);
+
+      await deShare.connect(other).publishItem(
+        "0x",
+        100000,
+        180,
+        [10, 10],
+        [USDC, USDT],
+        "Test Name",
+        "t01113",
+        { value: 6600000000000 }
+      )
+
+      items = await deShare.getAllSellerItems();
+      expect(0).to.be.eq(items.length);
+
+      await deShare.publishItem(
+        "0x",
+        100000,
+        180,
+        [10, 10],
+        [USDC, USDT],
+        "Test Name",
+        "t01113",
+        { value: 6600000000000 }
+      )
+
+      items = await deShare.getAllSellerItems();
+      expect(1).to.be.eq(items.length);
+
+      const id = await deShare.lastId();
+      await deShare.buyItem(id, USDC, 10, "0x");
+
+      items = await deShare.getAllSellerItems();
+      expect(1).to.be.eq(items.length);
+    })
+  })
+
+  describe("#getAllBuyerItems", () => {
+    it("try to get all seller items", async () => {
+      let items = await deShare.getAllBuyerItems();
+      expect(0).to.be.eq(items.length);
+
+      await deShare.connect(other).publishItem(
+        "0x",
+        100000,
+        180,
+        [10, 10],
+        [USDC, USDT],
+        "Test Name",
+        "t01113",
+        { value: 6600000000000 }
+      )
+
+      items = await deShare.getAllBuyerItems();
+      expect(0).to.be.eq(items.length);
+
+      await deShare.publishItem(
+        "0x",
+        100000,
+        180,
+        [10, 10],
+        [USDC, USDT],
+        "Test Name",
+        "t01113",
+        { value: 6600000000000 }
+      )
+
+      items = await deShare.getAllBuyerItems();
+      expect(0).to.be.eq(items.length);
+
+      const id = await deShare.lastId();
+      await deShare.buyItem(id, USDC, 10, "0x");
+
+      items = await deShare.getAllBuyerItems();
+      expect(1).to.be.eq(items.length);
+    })
   })
 })
