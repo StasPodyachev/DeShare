@@ -1,5 +1,5 @@
 {
-  "displayName": "deforex",
+  "displayName": "deshare",
   "scripts": {
     "build-contracts": "sol-merger --export-plugin SPDXLicenseRemovePlugin \"./contracts/*.sol\" ./build",
     "compile": "hardhat compile",
