@@ -123,5 +123,12 @@ contract DeShare is IDeShare, Ownable {
 
     function deleteItem(uint256 id) external itemExists(id) {}
 
-    function freezeItem(uint256 id) external itemExists(id) {}
+    function freezeItem(uint256 id, bool isFreezed) external itemExists(id) {
+        uint256 index = _itemsMap[id];
+        StoreItem memory item = _items[index];
+
+        require(item.owner == msg.sender, "DeShare: Only seller can freeze");
+
+        item.isFreezed = isFreezed;
+    }
 }
