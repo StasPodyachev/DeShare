@@ -22,7 +22,48 @@ contract DeShare is IDeShare, Ownable {
 
     modifier itemExists(uint256 id) {
         require(_itemsMap[id] > 0, "DeShare: Wrong Id");
+
+        StoreItem storage item = _items[_itemsMap[id]];
+        require(item.isDeleted == false, "DeShare: Wrong Id");
+
         _;
+    }
+
+    modifier onlySeller(uint256 id) {
+        StoreItem memory item = _items[_itemsMap[id]];
+
+        require(
+            item.owner == msg.sender,
+            "DeShare: Caller does not own the item"
+        );
+        _;
+    }
+
+    function getAllItems() external view returns (StoreItem[] memory) {
+        return _items;
+    }
+
+    function getAllSellerItems() external view returns (StoreItem[] memory) {
+        uint256[] memory items = _sellerItems[msg.sender];
+
+        StoreItem[] memory result = new StoreItem[](items.length);
+        for (uint256 i = 0; i < items.length; i++) {
+            uint256 index = _itemsMap[items[i]];
+            result[i] = _items[index];
+        }
+
+        return result;
+    }
+
+    function getAllBuyerItems() external view returns (StoreItem[] memory) {
+        uint256[] memory items = _buyerItems[msg.sender];
+
+        StoreItem[] memory result = new StoreItem[](items.length);
+        for (uint256 i = 0; i < items.length; i++) {
+            uint256 index = _itemsMap[items[i]];
+            result[i] = _items[index];
+        }
+        return result;
     }
 
     function setFactory(address factory) external onlyOwner {
@@ -60,7 +101,8 @@ contract DeShare is IDeShare, Ownable {
                 name: name,
                 dealCId: "",
                 hash_: hash_,
-                isFreezed: false
+                isFreezed: false,
+                isDeleted: false
             })
         );
 
@@ -121,14 +163,19 @@ contract DeShare is IDeShare, Ownable {
         return _items[_itemsMap[id]];
     }
 
-    function deleteItem(uint256 id) external itemExists(id) {}
-
-    function freezeItem(uint256 id, bool isFreezed) external itemExists(id) {
+    function deleteItem(uint256 id) external itemExists(id) onlySeller(id) {
         uint256 index = _itemsMap[id];
-        StoreItem memory item = _items[index];
+        StoreItem storage item = _items[index];
+        item.isDeleted = true;
+    }
 
-        require(item.owner == msg.sender, "DeShare: Only seller can freeze");
-
+    function freezeItem(uint256 id, bool isFreezed)
+        external
+        itemExists(id)
+        onlySeller(id)
+    {
+        uint256 index = _itemsMap[id];
+        StoreItem storage item = _items[index];
         item.isFreezed = isFreezed;
     }
 }

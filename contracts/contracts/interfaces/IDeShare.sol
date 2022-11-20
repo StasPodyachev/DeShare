@@ -13,6 +13,7 @@ interface IDeShare {
         string dealCId;
         bytes hash_;
         bool isFreezed;
+        bool isDeleted;
     }
 
     function setFactory(address factory) external;
@@ -20,6 +21,12 @@ interface IDeShare {
     function setFeePercent(uint256 val) external;
 
     function withdraw(address token, uint256 amount) external;
+
+    function getAllItems() external returns (StoreItem[] memory);
+
+    function getAllSellerItems() external returns (StoreItem[] memory);
+
+    function getAllBuyerItems() external returns (StoreItem[] memory);
 
     function publishItem(
         bytes calldata hash_,
