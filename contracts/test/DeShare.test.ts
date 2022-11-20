@@ -81,7 +81,7 @@ describe("DeShare", () => {
   })
 
   describe("#buyItem", () => {
-    it("success case", async () => {
+    it("buy item and get list", async () => {
 
       await deShare.connect(other).publishItem(
         "0x",
@@ -271,6 +271,51 @@ describe("DeShare", () => {
       const items = await deShare.getAllSellerItems();
       expect(items[0].isFreezed).to.be.eq(false);
     })
+  })
+
+  describe("#getUri", () => {
+    it("try to get uri", async () => {
+      await deShare.publishItem(
+        "0x",
+        100000,
+        180,
+        [10, 10],
+        [USDC, USDT],
+        "Test Name",
+        "t01113",
+        { value: 1 }
+      )
+
+      const id = await deShare.lastId();
+
+      expect(deShare.getUri(id, "0x")).to.be.not.reverted;
+    })
+
+    it("fails if uri does not exsit", async () => {
+      await expect(
+        deShare.getUri(1, "0x")
+      ).to.be.revertedWith("DeShare: Wrong Id")
+    })
+
+    it("fails if access is forbidden", async () => {
+      await deShare.connect(other).publishItem(
+        "0x",
+        100000,
+        180,
+        [10, 10],
+        [USDC, USDT],
+        "Test Name",
+        "t01113",
+        { value: 1 }
+      )
+
+      const id = await deShare.lastId();
+
+      await expect(
+        deShare.getUri(id, "0x")
+      ).to.be.revertedWith("DeShare: ACCESS_FORBIDDEN")
+    })
+
   })
 
 })

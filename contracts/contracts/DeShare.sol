@@ -168,11 +168,16 @@ contract DeShare is IDeShare, Ownable {
         itemExists(id)
         returns (bytes memory)
     {
-        require(_buyerAccess[id][msg.sender], "DeShare: ACCESS_FORBIDDEN");
+        StoreItem memory item = _items[_itemsMap[id]];
+
+        require(
+            _buyerAccess[id][msg.sender] || item.owner == msg.sender,
+            "DeShare: ACCESS_FORBIDDEN"
+        );
 
         // decode with private key seller ..
 
-        return _items[_itemsMap[id]].hash_;
+        return item.hash_;
     }
 
     function getItem(uint256 id)
