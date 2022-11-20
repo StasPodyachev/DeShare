@@ -39,7 +39,7 @@ describe("DeShare", () => {
         [10, 10],
         [USDC, USDT],
         "Test Name",
-        "t001",
+        "t01113",
         { value: 1 }
       )
 
@@ -58,7 +58,7 @@ describe("DeShare", () => {
           180,
           [10, 10],
           [USDC, USDT],
-          "t001",
+          "t01113",
           "Test Name"
         )
       ).to.be.revertedWith("DeShare: msg.value cannot be 0")
@@ -73,7 +73,7 @@ describe("DeShare", () => {
           [10, 10, 10, 10],
           [USDC, USDT],
           "Test Name",
-          "t001",
+          "t01113",
           { value: 1 }
         )
       ).to.be.revertedWith("DeShare: Incorrect input data")
@@ -90,7 +90,7 @@ describe("DeShare", () => {
         [10, 10],
         [USDC, USDT],
         "Test Name",
-        "t001",
+        "t01113",
         { value: 1 }
       )
 
@@ -122,7 +122,7 @@ describe("DeShare", () => {
         [10, 10],
         [USDC, USDT],
         "Test Name",
-        "t001",
+        "t01113",
         { value: 1 }
       )
 
@@ -144,7 +144,7 @@ describe("DeShare", () => {
         [10, 10],
         [USDC, USDT],
         "Test Name",
-        "t001",
+        "t01113",
         { value: 1 }
       )
 
@@ -168,7 +168,7 @@ describe("DeShare", () => {
         [10, 10],
         [USDC, USDT],
         "Test Name",
-        "t001",
+        "t01113",
         { value: 1 }
       )
 
@@ -198,7 +198,7 @@ describe("DeShare", () => {
         [10, 10],
         [USDC, USDT],
         "Test Name",
-        "t001",
+        "t01113",
         { value: 1 }
       )
 
@@ -222,7 +222,7 @@ describe("DeShare", () => {
         [10, 10],
         [USDC, USDT],
         "Test Name",
-        "t001",
+        "t01113",
         { value: 1 }
       )
 
@@ -258,7 +258,7 @@ describe("DeShare", () => {
         [10, 10],
         [USDC, USDT],
         "Test Name",
-        "t001",
+        "t01113",
         { value: 1 }
       )
 
