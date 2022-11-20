@@ -121,4 +121,4 @@ bin/
 data/
 coverage/
 coverage.json
-scripts
+# scripts

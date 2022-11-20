@@ -22,11 +22,11 @@ interface IDeShare {
 
     function withdraw(address token, uint256 amount) external;
 
-    function getAllItems() external returns (StoreItem[] memory);
+    function getAllItems() external view returns (StoreItem[] memory);
 
-    function getAllSellerItems() external returns (StoreItem[] memory);
+    function getAllSellerItems() external view returns (StoreItem[] memory);
 
-    function getAllBuyerItems() external returns (StoreItem[] memory);
+    function getAllBuyerItems() external view returns (StoreItem[] memory);
 
     function publishItem(
         bytes calldata hash_,
@@ -47,6 +47,7 @@ interface IDeShare {
 
     function getUri(uint256 id, bytes calldata sign)
         external
+        view
         returns (bytes memory);
 
     function getItem(uint256 id) external view returns (StoreItem memory);
