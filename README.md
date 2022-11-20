@@ -81,7 +81,7 @@ or
 
 ## Testing
 
-yarn test
+`yarn test`
 
 ## Contracts
 
