@@ -5,27 +5,30 @@ import styles from './ListMarket.module.css'
 const markets = [
   {
     id: 1,
-    title: "Image Portfolio",
-    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse amet eum dolore sunt itaque harum consectetur. Veniam, asperiores fuga iusto corporis corrupti tempore cumque non obcaecati molestias magnam veritatis laboriosam itaque rerum laudantium fugiat provident praesentium vitae aperiam!",
-    price: "220.50 USDT",
+    title: "Dataset Swaps FRAX/USDC",
+    description: "All swaps on Uniswap V3 pool with 100 fee",
+    price: "20.50 USDT",
     size: "26.2 Mb",
-    icon: "/icons/iconsCurrency/1inch.svg"
+    icon: "/dataset.svg",
+    categories: "Dataset"
   },
   {
     id: 3,
-    title: "Photos",
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, ipsa! Placeat quas explicabo dolores in qui.",
+    title: "Photoset Doge in New York",
+    description: "Exlusive Photos in Urban space. 24 items(1024x1928). Free to use under the Unsplash License",
     price: "128.40 USDT",
     size: "126.2 Mb",
-    icon: "/icons/iconsCurrency/Coinbase.svg"
+    icon: "/photo.svg",
+    categories: "Photo"
   },
   {
     id: 13,
-    title: "Icons",
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum totam ut, ipsa a explicabo, autem sed suscipit necessitatibus adipisci similique saepe dolor inventore!",
-    price: "220.50 USDT",
+    title: "Exlusive Rihana repeticion vocal.",
+    description: "Backstage from San Francisco Music hall",
+    price: "15 USDT",
     size: "26.2 Mb",
-    icon: "/icons/iconsCurrency/AVAX.svg"
+    icon: "/music.svg",
+    categories: "Music"
   }
 ]
 
