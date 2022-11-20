@@ -14,7 +14,7 @@ const markets = [
    description: "All swaps on Uniswap V3 pool with 100 fee",
    price: "20.50 USDT",
    size: "26.2 Mb",
-   icon: "/icons/iconsCurrency/1inch.svg",
+   icon: "/dataset.svg",
    categories: "Dataset"
  },
  {
@@ -23,7 +23,7 @@ const markets = [
    description: "Exlusive Photos in Urban space. 24 items(1024x1928). Free to use under the Unsplash License",
    price: "128.40 USDT",
    size: "126.2 Mb",
-   icon: "/icons/iconsCurrency/Coinbase.svg",
+   icon: "/photo.svg",
    categories: "Photo"
  },
  {
@@ -32,7 +32,7 @@ const markets = [
    description: "Backstage from San Francisco Music hall",
    price: "15 USDT",
    size: "26.2 Mb",
-   icon: "/icons/iconsCurrency/AVAX.svg",
+   icon: "/music.svg",
    categories: "Music"
  }
 ]
@@ -44,9 +44,9 @@ const filters = [
   {
     title: "Dataset",
   },
-  {
-    title: "Video",
-  },
+  // {
+  //   title: "Video",
+  // },
   {
     title: "Photo",
   },
