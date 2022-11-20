@@ -45,5 +45,5 @@ interface IDeShare {
 
     function deleteItem(uint256 id) external;
 
-    function freezeItem(uint256 id) external;
+    function freezeItem(uint256 id, bool isFreezed) external;
 }
