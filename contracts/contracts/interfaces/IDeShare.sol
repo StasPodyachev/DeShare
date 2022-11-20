@@ -2,6 +2,18 @@
 pragma solidity ^0.8.9;
 
 interface IDeShare {
+    struct PublishParam {
+        bytes hash_;
+        uint256 size;
+        uint256 duration;
+        uint256[] prices;
+        address[] tokens;
+        string name;
+        string description;
+        string provider;
+        uint256 categoryId;
+    }
+
     struct StoreItem {
         address owner;
         address[] tokens;
@@ -10,7 +22,9 @@ interface IDeShare {
         uint256 size;
         uint256 duration;
         uint256 timestamp;
+        uint256 categoryId;
         string name;
+        string description;
         string dealCId;
         bytes hash_;
         bool isFreezed;
@@ -29,15 +43,7 @@ interface IDeShare {
 
     function getAllBuyerItems() external view returns (StoreItem[] memory);
 
-    function publishItem(
-        bytes calldata hash_,
-        uint256 size,
-        uint256 duration,
-        uint256[] calldata prices,
-        address[] calldata tokens,
-        string calldata name,
-        string calldata provider
-    ) external payable;
+    function publishItem(PublishParam calldata param) external payable;
 
     function buyItem(
         uint256 id,

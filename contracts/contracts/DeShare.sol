@@ -89,26 +89,19 @@ contract DeShare is IDeShare, Ownable {
         TransferHelper.safeTransfer(token, msg.sender, amount);
     }
 
-    function publishItem(
-        bytes calldata hash_,
-        uint256 size,
-        uint256 duration,
-        uint256[] calldata prices,
-        address[] calldata tokens,
-        string calldata name,
-        string calldata provider
-    ) external payable {
+    function publishItem(PublishParam calldata param) external payable {
         MarketTypes.MockDeal memory deal = _marketApi.mock_provider_deal(
-            provider
+            param.provider
         );
 
         require(deal.id > 0, "DeShare: Invalid provider");
         require(
-            msg.value == (duration / EPOCH_SECONDS) * deal.price_per_epoch,
+            msg.value ==
+                (param.duration / EPOCH_SECONDS) * deal.price_per_epoch,
             "DeShare: msg.value is incorrect"
         );
         require(
-            prices.length == tokens.length,
+            param.prices.length == param.tokens.length,
             "DeShare: Incorrect input data"
         );
 
@@ -116,14 +109,16 @@ contract DeShare is IDeShare, Ownable {
             StoreItem({
                 id: ++lastId,
                 owner: msg.sender,
-                tokens: tokens,
-                prices: prices,
-                size: size,
-                duration: duration,
+                tokens: param.tokens,
+                prices: param.prices,
+                size: param.size,
+                duration: param.duration,
                 timestamp: block.timestamp,
-                name: name,
+                categoryId: param.categoryId,
+                name: param.name,
+                description: param.description,
                 dealCId: deal.cid,
-                hash_: hash_,
+                hash_: param.hash_,
                 isFreezed: false,
                 isDeleted: false
             })
