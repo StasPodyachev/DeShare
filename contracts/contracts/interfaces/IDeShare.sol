@@ -34,7 +34,8 @@ interface IDeShare {
         uint256 duration,
         uint256[] calldata prices,
         address[] calldata tokens,
-        string calldata name
+        string calldata name,
+        string calldata provider
     ) external payable;
 
     function buyItem(

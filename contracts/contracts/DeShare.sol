@@ -7,7 +7,12 @@ import "@uniswap/lib/contracts/libraries/TransferHelper.sol";
 import "./interfaces/IFactory.sol";
 import "./interfaces/IDeShare.sol";
 
+import "./MarketAPI.sol";
+import "./types/MarketTypes.sol";
+
 contract DeShare is IDeShare, Ownable {
+    uint256 constant EPOCH_SECONDS = 30;
+
     mapping(uint256 => mapping(address => bool)) internal _buyerAccess;
     mapping(address => uint256[]) internal _buyerItems;
     mapping(address => uint256[]) internal _sellerItems;
@@ -18,7 +23,8 @@ contract DeShare is IDeShare, Ownable {
     uint256 public lastId;
     uint256 public feePercent = 1e16;
 
-    IFactory _factory;
+    IFactory public _factory;
+    MarketAPI public _marketApi;
 
     modifier itemExists(uint256 id) {
         require(_itemsMap[id] > 0, "DeShare: Wrong Id");
@@ -70,6 +76,10 @@ contract DeShare is IDeShare, Ownable {
         _factory = IFactory(factory);
     }
 
+    function setMarketApi(MarketAPI marketApi_) external onlyOwner {
+        _marketApi = marketApi_;
+    }
+
     function setFeePercent(uint256 val) external onlyOwner {
         feePercent = val;
     }
@@ -84,9 +94,18 @@ contract DeShare is IDeShare, Ownable {
         uint256 duration,
         uint256[] calldata prices,
         address[] calldata tokens,
-        string calldata name
+        string calldata name,
+        string calldata provider
     ) external payable {
-        require(msg.value > 0, "DeShare: msg.value cannot be 0");
+        MarketTypes.MockDeal memory deal = _marketApi.mock_provider_deal(
+            provider
+        );
+
+        require(deal.id > 0, "DeShare: invalid provider");
+        require(
+            msg.value == (duration / EPOCH_SECONDS) * deal.price_per_epoch,
+            "DeShare: msg.value incorrect"
+        );
 
         // call filecoin method
 
@@ -99,7 +118,7 @@ contract DeShare is IDeShare, Ownable {
                 size: size,
                 duration: duration,
                 name: name,
-                dealCId: "",
+                dealCId: deal.cid,
                 hash_: hash_,
                 isFreezed: false,
                 isDeleted: false
