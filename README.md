@@ -31,11 +31,11 @@ Content Sellers will pay 10% of the content price to the DAO treasure. DAO struc
 
 #### Whitepaper: in progress
 
-For more comprehensive information about DeShare V1 you can read our whitepaper and project description on our [Notion Documentation](https://www.notion.so/godefx/Hackathon-FEVM-Team-Work-b633501446474ca480f0ca5b784f7c64).
+For more comprehensive information about DeShare V1 you can read our whitepaper and project description on our [Notion Documentation](https://godefx.notion.site/godefx/DeShare-Public-Documentation-Hackathon-FEVM-2976e0e5441f49c7bd843e85dd113a32).
 
 #### Technical Documentation
 
-Check our full Documentation [here](https://www.notion.so/godefx/Hackathon-FEVM-Team-Work-b633501446474ca480f0ca5b784f7c64) for more technical details.
+Check our full Documentation [here](https://godefx.notion.site/godefx/DeShare-Public-Documentation-Hackathon-FEVM-2976e0e5441f49c7bd843e85dd113a32) for more technical details.
 
 ## Smart contracts
 

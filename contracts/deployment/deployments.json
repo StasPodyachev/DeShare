@@ -1,7 +1,9 @@
 {
   "31415": {
     "Factory": { "address": "0x930826f2F2eEf29Ddd1Cb3a8F6ca10e807Cc32cc" },
-    "MarketAPI": { "address": "0x139391D7bC5E31aDd6C5c9c340fC9aCaDad1E52F" },
-    "DeShare": { "address": "0xA51DFA58a165B2f2017Fcfa0D8993dE87d18a382" }
+    "MarketAPI": { "address": "0x596E8364C4eeaE0047fC5Fc206696bf1b1a57FD8" },
+    "DeShare": { "address": "0x98Ec38960312CBB53aacfc7c1c5C9CBF4363d980" },
+    "USDC": { "address": "0x07BDcE320616D6e5495E5afc85444aC12b2a0cA2" },
+    "Faucet": { "address": "0xaF1C9635C52B9AB008F33671f0F9328079bbC8DC" }
   }
 }

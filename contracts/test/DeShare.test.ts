@@ -32,14 +32,17 @@ describe("DeShare", () => {
 
   describe("#publishItem", () => {
     it("publish item and get list", async () => {
-      await deShare.publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
@@ -52,29 +55,33 @@ describe("DeShare", () => {
 
     it("fails if msg.value is incorrect", async () => {
       await expect(
-        deShare.publishItem(
-          "0x",
-          100000,
-          180,
-          [10, 10],
-          [USDC, USDT],
-          "t01113",
-          "Test Name"
-        )
+        deShare.publishItem({
+          hash_: "0x",
+          size: 100000,
+          duration: 180,
+          prices: [10, 10],
+          tokens: [USDC, USDT],
+          name: "Test Name",
+          description: "Test Description",
+          provider: "t01113",
+          categoryId: 1
+        }),
       ).to.be.revertedWith("DeShare: msg.value is incorrect")
     })
 
     it("fails if input data is incorrect", async () => {
       await expect(
-        deShare.publishItem(
-          "0x",
-          100000,
-          180,
-          [10, 10, 10, 10],
-          [USDC, USDT],
-          "Test Name",
-          "t01113",
-          { value: 6600000000000 }
+        deShare.publishItem({
+          hash_: "0x",
+          size: 100000,
+          duration: 180,
+          prices: [10, 10, 10],
+          tokens: [USDC, USDT],
+          name: "Test Name",
+          description: "Test Description",
+          provider: "t01113",
+          categoryId: 1
+        }, { value: 6600000000000 }
         )
       ).to.be.revertedWith("DeShare: Incorrect input data")
     })
@@ -82,15 +89,17 @@ describe("DeShare", () => {
 
   describe("#buyItem", () => {
     it("buy item and get list", async () => {
-      await deShare.connect(other).publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
-        { value: 6600000000000 }
+      await deShare.connect(other).publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      }, { value: 6600000000000 }
       )
 
       const id = await deShare.lastId();
@@ -114,14 +123,17 @@ describe("DeShare", () => {
     })
 
     it("fails if deal expired", async () => {
-      await deShare.publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
@@ -136,14 +148,17 @@ describe("DeShare", () => {
     })
 
     it("fails if item is deleted", async () => {
-      await deShare.publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
@@ -157,14 +172,17 @@ describe("DeShare", () => {
     })
 
     it("fails if item is freezed", async () => {
-      await deShare.publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
@@ -181,14 +199,17 @@ describe("DeShare", () => {
 
   describe("#deleteItem", () => {
     it("try to buy item after deleting", async () => {
-      await deShare.publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
@@ -209,14 +230,17 @@ describe("DeShare", () => {
     })
 
     it("fails if caller does not own the item", async () => {
-      await deShare.connect(other).publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.connect(other).publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
@@ -233,14 +257,17 @@ describe("DeShare", () => {
 
   describe("#freezeItem", () => {
     it("try to buy after freeze", async () => {
-      await deShare.publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
@@ -272,14 +299,17 @@ describe("DeShare", () => {
     })
 
     it("fails if caller does not own the item", async () => {
-      await deShare.connect(other).publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.connect(other).publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
@@ -296,14 +326,17 @@ describe("DeShare", () => {
 
   describe("#getUri", () => {
     it("try to get uri", async () => {
-      await deShare.publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
@@ -319,14 +352,17 @@ describe("DeShare", () => {
     })
 
     it("fails if access is forbidden", async () => {
-      await deShare.connect(other).publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.connect(other).publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
@@ -344,28 +380,34 @@ describe("DeShare", () => {
       let items = await deShare.getAllItems();
       expect(0).to.be.eq(items.length);
 
-      await deShare.connect(other).publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.connect(other).publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
       items = await deShare.getAllItems();
       expect(1).to.be.eq(items.length);
 
-      await deShare.publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
@@ -385,28 +427,34 @@ describe("DeShare", () => {
       let items = await deShare.getAllSellerItems();
       expect(0).to.be.eq(items.length);
 
-      await deShare.connect(other).publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.connect(other).publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
       items = await deShare.getAllSellerItems();
       expect(0).to.be.eq(items.length);
 
-      await deShare.publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
@@ -426,28 +474,34 @@ describe("DeShare", () => {
       let items = await deShare.getAllBuyerItems();
       expect(0).to.be.eq(items.length);
 
-      await deShare.connect(other).publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.connect(other).publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
       items = await deShare.getAllBuyerItems();
       expect(0).to.be.eq(items.length);
 
-      await deShare.publishItem(
-        "0x",
-        100000,
-        180,
-        [10, 10],
-        [USDC, USDT],
-        "Test Name",
-        "t01113",
+      await deShare.publishItem({
+        hash_: "0x",
+        size: 100000,
+        duration: 180,
+        prices: [10, 10],
+        tokens: [USDC, USDT],
+        name: "Test Name",
+        description: "Test Description",
+        provider: "t01113",
+        categoryId: 1
+      },
         { value: 6600000000000 }
       )
 
