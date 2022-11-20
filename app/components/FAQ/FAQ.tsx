@@ -13,12 +13,12 @@ const FAQ = () => {
 
       <div className={styles.block}>
         <h2>How can I sell my file?</h2>
-        <p>To sell your file go to ________. Authorize with your Metamask and upload your file. Then add description, duration of file sale and set the price. Confirm transaction in Metamask to pay for your file storage. You have to have FIL tokens at your balance to pay for file storage.</p>
+        <p>To sell your file go to <Link href="/order" style={{"color" : "#54e390"}}>Sell file page</Link>. Authorize with your Metamask and upload your file. Then add description, duration of file sale and set the price. Confirm transaction in Metamask to pay for your file storage. You have to have FIL tokens at your balance to pay for file storage.</p>
       </div>
 
       <div className={styles.block}>
         <h2>How can I buy a file?</h2>
-        <p>To buy the file you choose here ________, you have to authorize with your Metamask</p>
+        <p>To buy the file you choose here <Link href="/" style={{"color" : "#54e390"}}>Market page</Link>, you have to authorize with your Metamask</p>
       </div>
 
       <div className={styles.block}>
