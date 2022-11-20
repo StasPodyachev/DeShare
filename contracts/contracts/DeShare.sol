@@ -147,7 +147,7 @@ contract DeShare is IDeShare, Ownable {
 
         require(item.isFreezed == false, "DeShare: Item is freezed");
         require(
-            item.duration + item.timestamp <= block.timestamp,
+            item.duration + item.timestamp > block.timestamp,
             "DeShare: Deal expired"
         );
 
