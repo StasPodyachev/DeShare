@@ -9,6 +9,7 @@ interface IDeShare {
         uint256 id;
         uint256 size;
         uint256 duration;
+        uint256 timestamp;
         string name;
         string dealCId;
         bytes hash_;

@@ -122,6 +122,7 @@ contract DeShare is IDeShare, Ownable {
                 prices: prices,
                 size: size,
                 duration: duration,
+                timestamp: block.timestamp,
                 name: name,
                 dealCId: deal.cid,
                 hash_: hash_,
@@ -145,6 +146,10 @@ contract DeShare is IDeShare, Ownable {
         StoreItem memory item = _items[index];
 
         require(item.isFreezed == false, "DeShare: Item is freezed");
+        require(
+            item.duration + item.timestamp > block.timestamp,
+            "DeShare: Deal expired"
+        );
 
         for (uint256 i = 0; i < item.tokens.length; i++) {
             if (item.tokens[i] == token) {
